@@ -1,8 +1,8 @@
 # MANTRA
 
-Install mantra package with this command
+You can install mantra package with this command
 ```python
-pip install . --upgrade
+pip install .
 ```
 
 A demo file is in directory demo. To run the demo, execute the command
