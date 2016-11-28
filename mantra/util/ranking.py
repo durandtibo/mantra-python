@@ -1,7 +1,7 @@
 
 import numpy as np
-from wsltibo.util.data.labeled_object import LabeledObject
-from wsltibo.util.ranking_cython import (average_precision_cython,
+from mantra.util.data.labeled_object import LabeledObject
+from mantra.util.ranking_cython import (average_precision_cython,
                                          find_optimum_neg_locations_cython,
                                          generate_ranking_from_labels_cython)
 
