@@ -13,5 +13,5 @@ setup(name='mantra',
       zip_safe=False,
       ext_modules=cythonize(['mantra/util/ranking_cython.pyx']),
       include_dirs=[numpy.get_include()],
-      # install_requires=['cython']
+      install_requires=['numpy', 'cython']
       )
