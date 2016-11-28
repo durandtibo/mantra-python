@@ -1,5 +1,5 @@
 
-from wsltibo.util.ranking_cython import average_precision_cython
+from mantra.util.ranking_cython import average_precision_cython
 import numpy as np
 
 class Evaluation:
