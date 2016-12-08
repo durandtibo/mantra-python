@@ -31,10 +31,6 @@ Year = {2015}
 }
 ```
 
-## Model
-
-$\sum_i$
-
 ## Licence
 
 MIT License
