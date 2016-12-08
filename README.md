@@ -1,9 +1,13 @@
 # MANTRA
 
-You can install mantra package with this command
+## Install
+
+When you are in the directory mantra-python, you can install mantra package with the following command:
 ```python
-pip install .
+python3 setup.py install
 ```
+
+## Demo
 
 A demo file is in directory demo. To run the demo, execute the command
 ```python
