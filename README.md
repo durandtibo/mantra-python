@@ -6,6 +6,7 @@ When you are in the directory mantra-python, you can install mantra package with
 ```python
 python3 setup.py install
 ```
+The code was developped with Python3.
 
 ## Demo
 
@@ -30,4 +31,7 @@ Year = {2015}
 }
 ```
 
+## Licence
+
+MIT License
 
