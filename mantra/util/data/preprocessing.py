@@ -1,6 +1,6 @@
 
 import numpy as np
-from wsltibo.util.data.labeled_object import LabeledObject
+from mantra.util.data.labeled_object import LabeledObject
 
 
 class Preprocessing:

@@ -5,7 +5,7 @@ from setuptools import setup
 setup(name='mantra',
       version='1.0',
       description='Weakly Supervised Learning',
-      url='https://gitlab.com/durandtibo/wsltibo',
+      url='https://github.com/durandtibo/mantra-python.git',
       author='Thibaut Durand',
       author_email='durand.tibo@gmail.com',
       license='MIT',
