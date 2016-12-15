@@ -267,6 +267,16 @@ class MultiClassMantraModel4Bag(MantraModel):
 
 
 	def get_all_scores(self, x, y):
+		"""Compute the score of bag instances for class y.
+
+		Args:
+			x (Bag): The bag.
+			y (int): The class.
+
+		Returns:
+			1d np.array: The score of bag instances for class y.
+
+		"""
 		# get the model for class y
 		feature_dim = x.get_dimension()
 		start_idx = y * feature_dim
@@ -482,6 +492,16 @@ class MultiClassMultiInstanceMantraModel4Bag(MantraModel):
 		return instance
 
 	def get_all_scores(self, x, y):
+		"""Compute the score of bag instances for class y.
+
+		Args:
+			x (Bag): The bag.
+			y (int): The class.
+
+		Returns:
+			1d np.array: The score of bag instances for class y.
+
+		"""
 		# get the model for class y
 		feature_dim = x.get_dimension()
 		start_idx = y * feature_dim
@@ -629,6 +649,15 @@ class RankingAPMantraModel4Bag(MantraModel):
 
 
 	def get_all_scores(self, x):
+		"""Compute the score of bag instances.
+
+		Args:
+			x (Bag): The bag.
+
+		Returns:
+			1d np.array: The score of bag instances.
+
+		"""
 		# compute the scores for each latent variable
 		scores = np.dot(self.w, x.instances)
 		return scores
