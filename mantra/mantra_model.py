@@ -266,6 +266,17 @@ class MultiClassMantraModel4Bag(MantraModel):
 		return instance
 
 
+	def get_all_scores(self, x, y):
+		# get the model for class y
+		feature_dim = x.get_dimension()
+		start_idx = y * feature_dim
+		end_idx = start_idx + feature_dim
+		wy = self.w[start_idx:end_idx]
+		# compute the scores for each latent variable
+		scores = np.dot(wy, x.instances)
+		return scores
+
+
 
 ###############################################################################
 # MultiClassMultiInstanceMantraModel4Bag
@@ -470,6 +481,15 @@ class MultiClassMultiInstanceMantraModel4Bag(MantraModel):
 		instance = self.sum_instances(x, h[0]) + self.sum_instances(x, h[1])
 		return instance
 
+	def get_all_scores(self, x, y):
+		# get the model for class y
+		feature_dim = x.get_dimension()
+		start_idx = y * feature_dim
+		end_idx = start_idx + feature_dim
+		wy = self.w[start_idx:end_idx]
+		# compute the scores for each latent variable
+		scores = np.dot(wy, x.instances)
+		return scores
 
 
 ###############################################################################
@@ -606,3 +626,9 @@ class RankingAPMantraModel4Bag(MantraModel):
 
 	def __str__(self):
 		return 'RankingAPMantraModel4Bag [dimension={}]'.format(self.get_dimension())
+
+
+	def get_all_scores(self, x):
+		# compute the scores for each latent variable
+		scores = np.dot(self.w, x.instances)
+		return scores

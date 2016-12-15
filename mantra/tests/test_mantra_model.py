@@ -4,7 +4,7 @@ import pytest
 
 from mantra.mantra_model import (MultiClassMantraModel4Bag,
                                  MultiClassMultiInstanceMantraModel4Bag)
-from mantra.util.data.bag.bag import Bag
+from mantra.util.data.bag import Bag
 
 
 ###############################################################################
@@ -171,6 +171,15 @@ def test_multiclass_sub():
 	assert np.array_equal(vector, vector_true)
 
 
+def test_multiclass_get_all_scores():
+	model, dimension = initialize_multiclass_model()
+	bag = initialize_bag(dimension)
+
+	scores = model.get_all_scores(bag, 0)
+	assert np.array_equal(scores, [210, 220, 230, 240, 250, 260, 270])
+
+
+
 ###############################################################################
 # MultiClassMultiInstanceMantraModel4Bag
 ###############################################################################
@@ -218,7 +227,6 @@ def test_multiclass_multi_instance_add_max_min_instances():
 	bag = initialize_bag2(dimension)
 
 	h = [[1], [3]]
-	print(h[0])
 	instance = model.add_max_min_instances(bag, h)
 	instance_true = [4, 24]
 	assert np.array_equal(instance, instance_true)
@@ -248,7 +256,6 @@ def test_multiclass_multi_instance_max_oracle():
 	model, dimension = initialize_multiclass_multi_instance_model()
 	bag = initialize_bag2(dimension)
 
-	print(model.w)
 	y_star, h_star = model.max_oracle(bag, 0)
 	assert y_star == 3 # label
 	assert h_star[0] == [9]	# h^+
@@ -282,7 +289,6 @@ def test_multiclass_multi_instance_predict():
 	bag = initialize_bag2(dimension)
 
 	# model.k = 2
-	print(model.w)
 	y_star, h_star = model.predict(bag)
 	assert y_star == 3#3 # label
 	assert h_star[0] == [9]	# h^+
@@ -373,3 +379,11 @@ def test_multiclass_multi_instance_sub():
 	model.sub(vector, bag, 3, h)
 	vector_true = [-4, -24, 0, 0, 0, 0, -20, -60]
 	assert np.array_equal(vector, vector_true)
+
+
+def test_multiclass_multi_instance_get_all_scores():
+	model, dimension = initialize_multiclass_multi_instance_model()
+	bag = initialize_bag2(dimension)
+
+	scores = model.get_all_scores(bag, 0)
+	assert np.array_equal(scores, [10, 11, 12, 13, 14, 15, 16, 17, 18, 19])
