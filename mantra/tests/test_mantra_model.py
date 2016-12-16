@@ -1,10 +1,10 @@
 
 import numpy as np
 import pytest
-
 from mantra.mantra_model import (MultiClassMantraModel4Bag,
                                  MultiClassMultiInstanceMantraModel4Bag)
 from mantra.util.data.bag import Bag
+from wslearn.util.labeled_object import LabeledObject
 
 
 ###############################################################################
@@ -23,6 +23,20 @@ def initialize_bag(dimension, num_instances=7):
 	instances = np.reshape(np.arange(dimension * num_instances), [dimension, num_instances])
 	bag = Bag("A", instances)
 	return bag
+
+def initalize_data(dimension=2, num_instances=10):
+	"""Generate a list of 4 labeled examples. """
+	instances = np.reshape(np.arange(dimension * num_instances), [dimension, num_instances])
+	data = list()
+	example1 = LabeledObject(Bag("A", instances), 1)
+	data.append(example1)
+	example2 = LabeledObject(Bag("B", instances), 0)
+	data.append(example2)
+	example3 = LabeledObject(Bag("C", instances), 2)
+	data.append(example3)
+	example4 = LabeledObject(Bag("D", instances), 3)
+	data.append(example4)
+	return data
 
 
 def test_multiclass_loss():
@@ -178,6 +192,22 @@ def test_multiclass_get_all_scores():
 	scores = model.get_all_scores(bag, 0)
 	assert np.array_equal(scores, [210, 220, 230, 240, 250, 260, 270])
 
+
+def test_multiclass_compute_scores_and_labels_binary():
+	data = initalize_data()
+	model = MultiClassMantraModel4Bag(2)
+	model.w = np.arange(4, dtype=np.float64)
+	model.initialization(data)
+
+	scores_and_labels = model.compute_scores_and_labels_binary(data)
+	assert scores_and_labels[0][0] == 76
+	assert scores_and_labels[0][1] == 1
+	assert scores_and_labels[1][0] == 76
+	assert scores_and_labels[1][1] == 0
+	assert scores_and_labels[2][0] == 76
+	assert scores_and_labels[2][1] == 2
+	assert scores_and_labels[3][0] == 76
+	assert scores_and_labels[3][1] == 3
 
 
 ###############################################################################

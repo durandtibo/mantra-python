@@ -234,6 +234,15 @@ class MultiClassMantraModel4Bag(MantraModel):
 			prediction_and_labels.append([y_predict, label])
 		return prediction_and_labels
 
+	def compute_scores_and_labels_binary(self, data):
+		prediction_and_labels = list()
+		for example in data:
+			pattern = example.pattern
+			label = example.label
+			score = self.value_of(pattern, 1) - self.value_of(pattern, 0)
+			prediction_and_labels.append([score, label])
+		return prediction_and_labels
+
 
 	def __str__(self):
 		return 'MultiClassMantraModel4Bag [num_classes={}, dimension={}]'.format(self.num_classes, self.get_dimension())
